@@ -1,0 +1,2914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="briefing">
+  <title>Novatrix Media — Strategic Communications, Research &amp; Digital Solutions (Kenya)</title>
+
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces: warm stone-white paper */
+      --background: #faf9f5;
+      --surface-container-low: #ffffff;
+      --surface-container: #f1efe8;
+      --surface-container-high: #e6e2d6;
+
+      /* Ink */
+      --on-surface: #17181a;
+      --on-surface-variant: #56585c;
+
+      /* Rules */
+      --outline: #17181a;
+      --outline-variant: #dedad0;
+
+      /* Accents */
+      --primary: #17181a;
+      --on-primary: #faf9f5;
+      --primary-container: #f2b705;
+      --on-primary-container: #17181a;
+      --secondary: #1f4e5f;
+      --tertiary: #785008;
+      --tag-warm-bg: #f5e6c4;
+      --error: #b42318;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #2b6e52;
+      --positive-bg: #e7f2ec;
+      --warning: #8a5a00;
+      --error-bg: #fdeceb;
+      --focus: #1f4e5f;
+      --focus-shadow: rgba(31, 78, 95, 0.16);
+      --border-muted: #c8c4b8;
+      --surface-hover: #2c2e33;
+
+      /* Data series */
+      --data-1: #1f4e5f;
+      --data-2: #d99000;
+      --data-3: #2b6e52;
+      --data-4: #b84a39;
+      --data-context: #c4bfb2;
+
+      /* Fonts */
+      --font-headline: 'Source Serif 4', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Type scale (Narrative) */
+      --display-size: clamp(2.5rem, 1.5rem + 3.8vw, 4.25rem);
+      --headline-size: clamp(1.75rem, 1.25rem + 1.8vw, 2.5rem);
+      --subhead-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.4375rem);
+      --body-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+      --label-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.375rem;
+      --rounded-full: 0.25rem;
+      --badge-radius: 2px;
+
+      /* Style effects */
+      --section-rule: 1.5px solid var(--outline);
+      --card-border: 1px solid var(--outline-variant);
+      --heading-tracking: -0.02em;
+      --label-tracking: 0.08em;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 5.5rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    html { scroll-behavior: smooth; }
+    header { position: static !important; }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-2xl);
+      padding: var(--space-lg) var(--space-lg) var(--space-3xl);
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 2.5px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      letter-spacing: var(--heading-tracking);
+      color: var(--on-surface);
+      margin: 0;
+    }
+    h1 {
+      font-size: var(--display-size);
+      line-height: 1.07;
+    }
+    h2 {
+      font-size: var(--headline-size);
+      line-height: 1.12;
+    }
+    h3 {
+      font-size: var(--subhead-size);
+      line-height: 1.22;
+    }
+    p {
+      margin: 0;
+      max-width: 65ch;
+    }
+
+    /* Briefing Dossier Bars */
+    .dossier-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm) var(--space-md);
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    .dossier-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .dossier-pill {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.6875rem;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      padding: 0.22rem 0.55rem;
+      border-radius: var(--badge-radius);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .dossier-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .standfirst {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+      line-height: 1.45;
+      color: var(--secondary);
+      margin-top: var(--space-sm);
+      max-width: 60ch;
+    }
+
+    /* Header & Nav */
+    .site-header {
+      padding-top: var(--space-xs);
+    }
+    .header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--card-border);
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--on-surface);
+    }
+    .brand-wordmark {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .brand-name {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .brand-tag {
+      font-family: var(--font-label);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-surface-variant);
+    }
+    .main-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs) var(--space-md);
+    }
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      text-decoration: none;
+      padding: 0.5rem 0.25rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      border-bottom: 2px solid transparent;
+      transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .nav-link:hover {
+      color: var(--secondary);
+      border-bottom-color: var(--secondary);
+    }
+
+    /* Buttons */
+    .btn {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      line-height: 1.2;
+      padding: 0.72rem 1.15rem;
+      min-height: 44px;
+      border-radius: var(--rounded);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .btn:active {
+      transform: translateY(1px);
+    }
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .btn-primary:hover {
+      background-color: var(--surface-hover);
+      border-color: var(--surface-hover);
+    }
+    .btn-secondary {
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--border-muted);
+    }
+    .btn-secondary:hover {
+      background-color: var(--surface-container);
+      border-color: var(--outline);
+    }
+    .btn-gold {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary-container);
+      font-weight: 700;
+    }
+    .btn-gold:hover {
+      background-color: var(--tertiary);
+      color: var(--on-primary);
+      border-color: var(--tertiary);
+    }
+    .btn-sm {
+      min-height: 40px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    /* Hero Section */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .hero-body {
+      color: var(--on-surface-variant);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    /* Figure cards & Asides */
+    .figure-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .figure-card .index-num {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      color: var(--secondary);
+      letter-spacing: 0.05em;
+    }
+    .figure-card .value {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.125rem);
+      line-height: 1.1;
+      font-variant-numeric: lining-nums tabular-nums;
+      color: var(--on-surface);
+    }
+    .figure-card .caption {
+      font-size: 0.875rem;
+      line-height: 1.45;
+      color: var(--on-surface-variant);
+    }
+
+    .aside-box {
+      background: var(--surface-container);
+      border-top: var(--section-rule);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 0 0 var(--rounded-lg) var(--rounded-lg);
+    }
+
+    /* Positioning Comparison Table */
+    .positioning-block {
+      margin-top: var(--space-lg);
+    }
+    .table-wrap {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      overflow-x: auto;
+    }
+    table.briefing-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9375rem;
+    }
+    table.briefing-table th {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface);
+      background: var(--surface-container);
+      border-bottom: var(--section-rule);
+      padding: var(--space-sm) var(--space-md);
+    }
+    table.briefing-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: var(--card-border);
+      vertical-align: top;
+    }
+    table.briefing-table tr:last-child td {
+      border-bottom: none;
+    }
+    .col-ordinary {
+      color: var(--on-surface-variant);
+    }
+    .col-novatrix {
+      color: var(--on-surface);
+      font-weight: 500;
+    }
+    .num-cell {
+      font-family: var(--font-label);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* Section Header Pattern */
+    .section-intro {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-lg);
+    }
+    .section-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Segmented Filter Controls */
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.5rem 0.9rem;
+      min-height: 44px;
+      border-radius: var(--rounded);
+      border: 1px solid var(--border-muted);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .filter-btn:hover {
+      background: var(--surface-container);
+      border-color: var(--outline);
+    }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* Package Cards Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(265px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .package-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+      position: relative;
+      transition: border-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .package-card:hover {
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+    .package-card.is-featured {
+      border-top: 3px solid var(--primary-container);
+    }
+    .package-card.is-hidden {
+      display: none;
+    }
+    .pkg-top {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .pkg-kicker-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .tag-chip {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--rounded);
+      background: var(--tag-warm-bg);
+      color: var(--tertiary);
+      display: inline-block;
+    }
+    .tag-chip-slate {
+      background: var(--surface-container);
+      color: var(--secondary);
+    }
+    .pkg-price {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: clamp(1.625rem, 1.35rem + 0.8vw, 2rem);
+      line-height: 1.1;
+      font-variant-numeric: lining-nums tabular-nums;
+      color: var(--on-surface);
+      margin-top: var(--space-xs);
+    }
+    .pkg-unit {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    .pkg-desc {
+      font-size: 0.9rem;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+    }
+    .pkg-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      border-top: var(--card-border);
+      padding-top: var(--space-md);
+      font-size: 0.875rem;
+    }
+    .pkg-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    .pkg-list li svg {
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+      color: var(--secondary);
+    }
+
+    /* Sub-band Divider */
+    .sub-band-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-sm);
+      border-bottom: var(--card-border);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-md);
+    }
+    .sub-band-head:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Add-ons strip */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-sm);
+    }
+    .addon-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .addon-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--on-surface);
+    }
+    .addon-price {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* Target Sectors & Chart */
+    .sector-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .sector-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
+    }
+    .sector-detail {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .sector-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+      padding-top: var(--space-sm);
+      border-top: var(--card-border);
+    }
+    .sector-kv-label {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      margin-bottom: 0.2rem;
+    }
+    .sector-kv-val {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.4;
+    }
+    .chart-box {
+      position: relative;
+      width: 100%;
+      min-height: 290px;
+      margin-top: var(--space-sm);
+    }
+    .research-Callouts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: var(--card-border);
+    }
+    .mini-stat {
+      background: var(--surface-container);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+    }
+    .mini-stat-num {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--secondary);
+      font-variant-numeric: tabular-nums;
+    }
+    .mini-stat-label {
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      line-height: 1.35;
+    }
+
+    /* Portfolio Showcase */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .case-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+      transition: border-color var(--dur-short) var(--ease-out);
+    }
+    .case-card.is-active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+    .case-card.is-hidden {
+      display: none;
+    }
+    .case-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .case-summary {
+      font-size: 0.9rem;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+    }
+    .case-drawer {
+      margin-top: var(--space-lg);
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-top: 3px solid var(--secondary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .series-strip {
+      margin-top: var(--space-lg);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .series-pill-card {
+      background: var(--surface-container);
+      border-left: 3px solid var(--primary-container);
+      padding: var(--space-md);
+      border-radius: 0 var(--rounded) var(--rounded) 0;
+    }
+
+    /* Quote Calculator & Inquiry Form */
+    .quote-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .quote-panel {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--card-border);
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+      align-items: end;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .field-label {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+    .field-hint {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      color: var(--on-surface-variant);
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--border-muted);
+      border-radius: var(--rounded);
+      padding: 0.65rem 0.75rem;
+      min-height: 44px;
+      width: 100%;
+      transition: border-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    select {
+      padding-right: 2.25rem;
+    }
+    textarea {
+      min-height: 108px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 2px var(--focus-shadow);
+      outline: none;
+    }
+    input.has-error, select.has-error, textarea.has-error {
+      border-color: var(--error);
+    }
+
+    .addon-controls-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+      align-items: end;
+    }
+    .checkbox-card {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      border-radius: var(--rounded);
+      min-height: 44px;
+      cursor: pointer;
+    }
+    .checkbox-card input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-height: 18px;
+      margin-top: 0.15rem;
+      accent-color: var(--secondary);
+      cursor: pointer;
+    }
+
+    /* Quote Summary Card */
+    .summary-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-top: 3px solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .summary-totals {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--surface-container);
+      border-radius: var(--rounded);
+    }
+    .total-label {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+    .total-amount {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: clamp(1.375rem, 1.15rem + 0.75vw, 1.85rem);
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.15;
+    }
+    .payment-split {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+      padding: var(--space-sm) 0;
+      border-top: var(--card-border);
+      border-bottom: var(--card-border);
+    }
+    .deliverable-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+    }
+    .deliverable-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-bottom: 0.3rem;
+      border-bottom: 1px dashed var(--outline-variant);
+    }
+    .deliverable-list li:last-child {
+      border-bottom: none;
+    }
+    .summary-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    /* Inquiry Form */
+    .inquiry-wrapper {
+      margin-top: var(--space-xl);
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .status-banner {
+      padding: var(--space-md);
+      border-radius: var(--rounded);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: none;
+    }
+    .status-banner.is-visible {
+      display: block;
+    }
+    .status-banner.is-error {
+      background: var(--error-bg);
+      color: var(--error);
+      border-left: 4px solid var(--error);
+    }
+    .status-banner.is-success {
+      background: var(--positive-bg);
+      color: var(--positive);
+      border-left: 4px solid var(--positive);
+    }
+
+    .saved-requests-box {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: var(--card-border);
+    }
+    .request-log-item {
+      background: var(--surface-container);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      font-size: 0.85rem;
+      margin-top: var(--space-xs);
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: var(--section-rule);
+      padding-top: var(--space-xl);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: var(--space-xl);
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .footer-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface);
+      margin-top: var(--space-xs);
+    }
+
+    /* Reveal animation */
+    .reveal-section {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity var(--dur-long) var(--ease-out), transform var(--dur-long) var(--ease-out);
+    }
+    .reveal-section.is-pending {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 920px) {
+      .hero-grid,
+      .sector-layout,
+      .case-drawer,
+      .quote-workspace,
+      .inquiry-wrapper,
+      .site-footer {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-xl);
+      }
+      .hero-metrics,
+      .form-grid-2,
+      .addon-controls-grid,
+      .summary-totals,
+      .sector-meta-grid,
+      .research-Callouts {
+        grid-template-columns: 1fr;
+      }
+      .header-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .main-nav {
+        width: 100%;
+        gap: var(--space-xs) var(--space-sm);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    :root {
+      color-scheme: light;
+      --background: #061f2b;
+      --surface-container-low: #0a2b39;
+      --surface-container: #102f3c;
+      --surface-container-high: #163b49;
+      --on-surface: #ffffff;
+      --on-surface-variant: #aebfc7;
+      --outline: rgba(224, 232, 236, 0.45);
+      --outline-variant: rgba(224, 232, 236, 0.22);
+      --primary: #f15a50;
+      --on-primary: #061f2b;
+      --primary-container: #f15a50;
+      --on-primary-container: #061f2b;
+      --secondary: #e0e8ec;
+      --tertiary: #f15a50;
+      --tag-warm-bg: #0a2b39;
+      --focus: #f15a50;
+      --focus-shadow: rgba(241, 90, 80, 0.2);
+      --border-muted: rgba(224, 232, 236, 0.32);
+      --surface-hover: #ff7268;
+      --data-1: #f15a50;
+      --data-2: #e0e8ec;
+      --data-3: #aebfc7;
+      --data-4: #ff7268;
+      --data-context: #526a75;
+      --font-headline: Manrope, "Avenir Next", Avenir, Arial, sans-serif;
+      --font-body: Manrope, "Avenir Next", Avenir, Arial, sans-serif;
+      --font-label: Manrope, "Avenir Next", Avenir, Arial, sans-serif;
+      --body-size: 1rem;
+      --space-xs: 0.2rem;
+      --space-sm: 0.375rem;
+      --space-md: 0.625rem;
+      --space-lg: 0.875rem;
+      --space-xl: 1.25rem;
+      --space-2xl: 1.75rem;
+      --space-3xl: 2.25rem;
+      --section-rule: 1px solid var(--outline);
+      --card-border: 1px solid var(--outline-variant);
+    }
+    .page-grid { max-width: 1180px; padding: 12px 16px 24px; gap: var(--space-2xl); }
+    h1, h2, h3, h4 { font-family: var(--font-body); font-weight: 800; }
+    .nav-link { min-height: 38px; padding: 0.25rem 0.2rem; }
+    .btn { padding: 0.55rem 0.85rem; min-height: 40px; }
+    .filter-btn { min-height: 38px; padding: 0.4rem 0.7rem; }
+    table.briefing-table th,
+    table.briefing-table td { padding: 0.4rem 0.55rem; }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea { padding: 0.5rem 0.6rem; min-height: 40px; }
+    @media (max-width: 640px) {
+      .page-grid { padding: 10px 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+
+    <!-- HEADER -->
+    <header class="site-header" id="top">
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">NOVATRIX MEDIA</span>
+          <span class="dossier-meta">Nairobi, Kenya · Strategic Communications · Research · Digital Solutions</span>
+        </div>
+        <span class="dossier-meta">Agency Dossier &amp; Rate Card 2026</span>
+      </div>
+
+      <div class="header-row">
+        <a href="#top" class="brand-lockup" aria-label="Novatrix Media Home">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="36" height="36" rx="4" style="fill: var(--primary)"/>
+            <path d="M9 26V10H13.2L22.8 21.2V10H27V26H22.8L13.2 14.8V26H9Z" style="fill: var(--on-primary)"/>
+            <rect x="24" y="6" width="6" height="3" style="fill: var(--primary-container)"/>
+          </svg>
+          <span class="brand-wordmark">
+            <span class="brand-name">Novatrix Media</span>
+            <span class="brand-tag">Let Us Tell Your Story</span>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a class="nav-link" href="#about">Positioning</a>
+          <a class="nav-link" href="#services">Packages</a>
+          <a class="nav-link" href="#sectors">Sector Focus</a>
+          <a class="nav-link" href="#portfolio">Portfolio</a>
+          <a class="nav-link" href="#quote">Quote &amp; Contact</a>
+          <a class="btn btn-primary btn-sm" href="#quote">Build a Quote</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 01: INTRODUCTION & POSITIONING -->
+    <section id="about" class="reveal-section">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div>
+            <span class="dossier-pill">01 · AGENCY OVERVIEW</span>
+          </div>
+          <h1>Intelligence behind communication. Strategy behind visibility.</h1>
+          <p class="standfirst">
+            An African strategic communications, research, and digital solutions agency based in Nairobi—built for NGOs, development initiatives, and ambitious commercial enterprises.
+          </p>
+          <div class="hero-body">
+            <p>
+              Across Kenya, impactful organisations and growing businesses routinely fall behind not because their field work lacks substance, but because their digital presence fails to communicate their credibility. Novatrix Media bridges that gap—translating programme realities, research insights, and commercial capabilities into structured narratives that earn trust from donors, partners, regulators, and customers.
+            </p>
+            <p>
+              Rather than operating as a generic posting vendor, we pair development communications, market intelligence, brand positioning, and mobile-first web architecture into clear monthly retainers and fixed-scope build packages.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#quote">
+              <i data-lucide="calculator" aria-hidden="true" width="18" height="18"></i>
+              Calculate Your Quote
+            </a>
+            <a class="btn btn-secondary" href="#services">
+              <i data-lucide="layers" aria-hidden="true" width="18" height="18"></i>
+              Compare KSh Packages
+            </a>
+          </div>
+        </div>
+
+        <aside aria-label="Kenya market context and agency scope">
+          <div class="hero-metrics">
+            <div class="figure-card">
+              <span class="index-num">01 · DEMOGRAPHIC</span>
+              <span class="value">75%+</span>
+              <span class="caption">Share of Kenya’s population under 35—demanding authentic youth-led and digital-first storytelling.</span>
+            </div>
+            <div class="figure-card">
+              <span class="index-num">02 · VIDEO GAP</span>
+              <span class="value">70%+</span>
+              <span class="caption">Kenyan NGOs &amp; CBOs relying solely on static graphics or text, missing Reels and TikTok reach.</span>
+            </div>
+            <div class="figure-card">
+              <span class="index-num">03 · WEB GAP</span>
+              <span class="value">~30%</span>
+              <span class="caption">Grassroots initiatives and regional CBOs operating without a functional, mobile-ready website.</span>
+            </div>
+            <div class="figure-card">
+              <span class="index-num">04 · ACCESSIBLE TIERS</span>
+              <span class="value">KSh 8k–45k</span>
+              <span class="caption">Transparent monthly social retainers alongside KSh 10k–30k fixed-fee website builds.</span>
+            </div>
+          </div>
+
+          <div class="aside-box" style="margin-top: var(--space-md);">
+            <span class="dossier-meta" style="display:block; margin-bottom: var(--space-xs);">Core Philosophy</span>
+            <p style="font-size: 0.9rem; color: var(--on-surface);">
+              <strong>Research. Reputation. Relationships. Visibility.</strong> Every engagement begins with audience clarity and ends with measurable reach across LinkedIn, TikTok, Instagram, Facebook, and owned web platforms.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Positioning Comparison Table -->
+      <div class="positioning-block">
+        <div class="sub-band-head">
+          <h3>Why organisations partner with Novatrix Media</h3>
+          <span class="dossier-meta">Strategic Partner vs. Generic Vendor</span>
+        </div>
+        <div class="table-wrap">
+          <table class="briefing-table">
+            <thead>
+              <tr>
+                <th scope="col">Capability Area</th>
+                <th scope="col">Ordinary Agency Positioning</th>
+                <th scope="col">The Novatrix Media Approach</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Web Platforms</strong></td>
+                <td class="col-ordinary">“We build basic template websites.”</td>
+                <td class="col-novatrix">We build mobile-friendly digital platforms that communicate organisational value, structure programme archives, and make businesses discoverable on Google.</td>
+              </tr>
+              <tr>
+                <td><strong>Social Media</strong></td>
+                <td class="col-ordinary">“We post graphics and captions.”</td>
+                <td class="col-novatrix">We develop platform-specific communication strategies—pairing ground-level Reels/TikTok storytelling with LinkedIn executive thought leadership.</td>
+              </tr>
+              <tr>
+                <td><strong>Corporate &amp; NGO Profiles</strong></td>
+                <td class="col-ordinary">“We format company brochures.”</td>
+                <td class="col-novatrix">We translate operational capabilities, governance, and community outcomes into persuasive donor, CSR, and tender-ready narratives.</td>
+              </tr>
+              <tr>
+                <td><strong>Research &amp; Reporting</strong></td>
+                <td class="col-ordinary">“We send vanity reach screenshots.”</td>
+                <td class="col-novatrix">We generate market, competitor, and audience intelligence that shapes monthly content direction and supports informed leadership decisions.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02: SERVICE OFFERINGS & PACKAGES -->
+    <section id="services" class="reveal-section">
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">02 · SERVICES &amp; PRICING</span>
+          <span class="dossier-meta">Social Retainers (KSh 8k–45k/mo) · Website Packages (KSh 10k–30k)</span>
+        </div>
+        <span class="dossier-meta">Click any tier to load into Quote Calculator</span>
+      </div>
+
+      <div class="section-intro">
+        <h2>Clear, transparent packages tailored for NGOs and commercial brands</h2>
+        <p style="color: var(--on-surface-variant);">
+          Whether you are a community-based organisation building donor credibility or a Kenyan SME turning product quality into steady customer enquiries, every tier includes structured planning and monthly reporting.
+        </p>
+      </div>
+
+      <div class="section-controls">
+        <div class="filter-group" role="group" aria-label="Filter social media packages by audience track">
+          <button type="button" class="filter-btn" id="track-all" aria-pressed="true" onclick="filterPackageTrack('all')">All Retainer Tiers</button>
+          <button type="button" class="filter-btn" id="track-ngo" aria-pressed="false" onclick="filterPackageTrack('ngo')">NGOs &amp; Development</button>
+          <button type="button" class="filter-btn" id="track-biz" aria-pressed="false" onclick="filterPackageTrack('biz')">Commercial &amp; SMEs</button>
+        </div>
+        <span class="dossier-meta" id="package-filter-status">Showing all 4 monthly tiers (KSh 8,000 – KSh 45,000/mo)</span>
+      </div>
+
+      <!-- Part A: Social Media Management -->
+      <div class="sub-band-head">
+        <h3>A. Social Media Management &amp; Digital Storytelling (Monthly)</h3>
+        <span class="dossier-meta">Billed monthly in advance · 1 consolidated revision round per item</span>
+      </div>
+
+      <div class="card-grid" id="social-packages-grid">
+        <!-- Social Starter -->
+        <article class="package-card" data-track="biz">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">Commercial · Entry</span>
+              <span class="dossier-meta">2 Platforms</span>
+            </div>
+            <h3>Social Starter</h3>
+            <div class="pkg-price">KSh 8,000 <span class="pkg-unit">/ month</span></div>
+            <p class="pkg-desc">Affordable entry package for startups and small businesses establishing a consistent online presence.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>4 short-form videos/mo (TikTok &amp; IG Reels)</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>1 TikTok carousel post &amp; 1 graphic/poster</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Simple editing, captions, hashtags &amp; scheduling</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>IG search optimisation &amp; TikTok account setup</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>One-time logo design &amp; monthly review</span></li>
+          </ul>
+          <button type="button" class="btn btn-secondary" onclick="selectPackageForQuote('social_starter', 'biz')">Select Social Starter</button>
+        </article>
+
+        <!-- Community Visibility / Social Growth -->
+        <article class="package-card is-featured" data-track="both">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip">Recommended · NGO &amp; SME</span>
+              <span class="dossier-meta">2 Platforms</span>
+            </div>
+            <h3>Community Visibility / Social Growth</h3>
+            <div class="pkg-price">KSh 15,000 <span class="pkg-unit">/ month</span></div>
+            <p class="pkg-desc">Built for small NGOs/CBOs establishing trust and growing businesses educating audiences to attract customers.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>4–6 short-form videos/mo (TikTok, IG &amp; FB Reels)</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>2 educational/informative carousel posts/mo</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>2 branded or promotional graphic designs/mo</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Monthly content strategy, calendar &amp; scheduling</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Profile optimisation, basic comment monitoring &amp; review</span></li>
+          </ul>
+          <button type="button" class="btn btn-primary" onclick="selectPackageForQuote('social_growth_ngo', 'ngo')">Select KSh 15,000 Tier</button>
+        </article>
+
+        <!-- Social Visibility -->
+        <article class="package-card" data-track="biz">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">Commercial · Scale</span>
+              <span class="dossier-meta">3 Platforms</span>
+            </div>
+            <h3>Social Visibility</h3>
+            <div class="pkg-price">KSh 25,000 <span class="pkg-unit">/ month</span></div>
+            <p class="pkg-desc">For established businesses seeking stronger market visibility and consistent weekday audience engagement.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>8 short-form videos/mo (TikTok, IG &amp; FB Reels)</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>4 educational carousels &amp; 6 promotional graphics</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Professional video editing, captions &amp; story updates</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Weekday comment &amp; DM monitoring</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>One-time logo, strategy calendar &amp; recommendations</span></li>
+          </ul>
+          <button type="button" class="btn btn-secondary" onclick="selectPackageForQuote('social_visibility', 'biz')">Select Social Visibility</button>
+        </article>
+
+        <!-- Strategic Communications Partnership -->
+        <article class="package-card is-featured" data-track="ngo">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip">Flagship NGO Partner</span>
+              <span class="dossier-meta">4 Platforms</span>
+            </div>
+            <h3>Strategic Comms Partnership</h3>
+            <div class="pkg-price">KSh 45,000 <span class="pkg-unit">/ month</span></div>
+            <p class="pkg-desc">For established NGOs and development organisations seeking ongoing communications leadership and deeper storytelling.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>12 short-form videos/mo across TikTok, IG &amp; FB</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>4 educational carousels &amp; 4 branded programme graphics</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>LinkedIn leadership &amp; donor/CSR positioning</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Strategic recommendations for digital visibility</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>1 monthly strategic communications meeting</span></li>
+          </ul>
+          <button type="button" class="btn btn-primary" onclick="selectPackageForQuote('strategic_comms', 'ngo')">Select Flagship Retainer</button>
+        </article>
+      </div>
+
+      <!-- Add-ons strip -->
+      <div class="aside-box" style="margin-top: var(--space-lg);">
+        <span class="dossier-meta" style="display:block; margin-bottom: var(--space-xs);">Optional Monthly &amp; Production Add-Ons</span>
+        <div class="addons-grid">
+          <div class="addon-item">
+            <span class="addon-name">Extra Reel / Video Edit</span>
+            <span class="addon-price">KSh 600 per video</span>
+          </div>
+          <div class="addon-item">
+            <span class="addon-name">Extra Carousel Post</span>
+            <span class="addon-price">KSh 800 per post</span>
+          </div>
+          <div class="addon-item">
+            <span class="addon-name">Profile Setup &amp; Optimisation</span>
+            <span class="addon-price">KSh 1,000 one-time</span>
+          </div>
+          <div class="addon-item">
+            <span class="addon-name">On-Site Content Filming</span>
+            <span class="addon-price">KSh 2,500 per session</span>
+          </div>
+          <div class="addon-item">
+            <span class="addon-name">Paid Ad Management</span>
+            <span class="addon-price">Quoted separately (client pays ad spend)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part B: Website Design Packages -->
+      <div class="sub-band-head">
+        <h3>B. Website Design &amp; Development Packages (Fixed Scope)</h3>
+        <span class="dossier-meta">50% deposit to start · 50% on launch · Extra pages KSh 1,500 each</span>
+      </div>
+
+      <div class="card-grid">
+        <article class="package-card">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">One-Page</span>
+              <span class="dossier-meta">1 Revision</span>
+            </div>
+            <h3>Basic Website</h3>
+            <div class="pkg-price">KSh 10,000 <span class="pkg-unit">one-time</span></div>
+            <p class="pkg-desc">Ideal for startups, individuals, and small businesses launching an authoritative single-page presence.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Home, About, Services &amp; Contact sections</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Mobile-friendly responsive layout</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>WhatsApp contact &amp; click-to-call buttons</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Social media links &amp; basic SEO setup</span></li>
+          </ul>
+          <button type="button" class="btn btn-secondary" onclick="selectWebForQuote('web_basic')">Select Basic Web</button>
+        </article>
+
+        <article class="package-card">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">Multi-Page Entry</span>
+              <span class="dossier-meta">2 Weeks · 2 Revisions</span>
+            </div>
+            <h3>Starter / Essential Website</h3>
+            <div class="pkg-price">KSh 15,000 <span class="pkg-unit">one-time</span></div>
+            <p class="pkg-desc">Designed for small businesses and community initiatives needing dedicated programme or product pages.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Up to 3 pages (SME) or 7-page institutional layout</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>WhatsApp integration &amp; structured contact form</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Image gallery &amp; social media integration</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Basic SEO setup &amp; 30-day post-launch support</span></li>
+          </ul>
+          <button type="button" class="btn btn-secondary" onclick="selectWebForQuote('web_starter')">Select Starter Web</button>
+        </article>
+
+        <article class="package-card is-featured">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip">Most Popular</span>
+              <span class="dossier-meta">3 Weeks · 2 Revisions</span>
+            </div>
+            <h3>Standard Website</h3>
+            <div class="pkg-price">KSh 20,000 <span class="pkg-unit">one-time</span></div>
+            <p class="pkg-desc">Complete professional web platform for growing businesses, parishes, and active NGOs.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Up to 5 pages (SME) or 12 pages (NGO/Parish)</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Customised design, enquiry forms &amp; Google Maps</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Google Analytics &amp; Search Console setup</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Portfolio/gallery, full handover &amp; admin guide</span></li>
+          </ul>
+          <button type="button" class="btn btn-primary" onclick="selectWebForQuote('web_standard')">Select Standard Web</button>
+        </article>
+
+        <article class="package-card">
+          <div class="pkg-top">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">Comprehensive</span>
+              <span class="dossier-meta">4–5 Weeks · 3 Revisions</span>
+            </div>
+            <h3>Premium Website</h3>
+            <div class="pkg-price">KSh 30,000 <span class="pkg-unit">one-time</span></div>
+            <p class="pkg-desc">Full-scale digital hub for established organisations needing editorial publishing, leadership profiles, and CMS control.</p>
+          </div>
+          <ul class="pkg-list">
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Up to 8 pages (SME) or 20 pages (Institutional)</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>News/Blog, Testimonials &amp; Leadership profiles</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Content management (CMS) &amp; enhanced enquiry forms</span></li>
+            <li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>Team training sessions &amp; up to 90-day support</span></li>
+          </ul>
+          <button type="button" class="btn btn-secondary" onclick="selectWebForQuote('web_premium')">Select Premium Web</button>
+        </article>
+      </div>
+
+      <div class="aside-box" style="margin-top: var(--space-lg);">
+        <span class="dossier-meta" style="display:block; margin-bottom: var(--space-xs);">Hosting, Ownership &amp; Year 2+ Maintenance Plans</span>
+        <p style="font-size: 0.9rem;">
+          Once fully paid, the domain, content, and website belong entirely to the client. Optional Year 2+ annual maintenance keeps sites secure, backed up, and updated: <strong>Essential (KSh 5,000/yr</strong> · up to 2 updates/mo), <strong>Standard (KSh 7,000/yr</strong> · up to 4 updates/mo), and <strong>Premium (KSh 10,000/yr</strong> · up to 6 updates/mo).
+        </p>
+      </div>
+    </section>
+
+    <!-- 03: TARGET CLIENT FOCUS & KENYA FIELD INTELLIGENCE -->
+    <section id="sectors" class="reveal-section">
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">03 · TARGET SECTORS &amp; RESEARCH</span>
+          <span class="dossier-meta">Kenya Civil Society &amp; Enterprise Landscape</span>
+        </div>
+        <span class="dossier-meta">Grounded in 30-Organisation Prospect Study</span>
+      </div>
+
+      <div class="section-intro">
+        <h2>Specialised sector fluency across Kenya’s impact and commercial ecosystems</h2>
+        <p style="color: var(--on-surface-variant);">
+          Generic agencies treat every client alike. Select a sector below to inspect the specific communications gaps Novatrix Media solves—informed by real operating benchmarks across Kenya.
+        </p>
+      </div>
+
+      <div class="sector-layout">
+        <div>
+          <div class="sector-tabs" role="group" aria-label="Target Client Sectors">
+            <button type="button" class="filter-btn" id="sec-btn-ngos" aria-pressed="true" onclick="selectSector('ngos')">NGOs &amp; CBOs</button>
+            <button type="button" class="filter-btn" id="sec-btn-youth" aria-pressed="false" onclick="selectSector('youth')">Youth Development</button>
+            <button type="button" class="filter-btn" id="sec-btn-women" aria-pressed="false" onclick="selectSector('women')">Women’s Empowerment</button>
+            <button type="button" class="filter-btn" id="sec-btn-edu" aria-pressed="false" onclick="selectSector('edu')">Education &amp; Scholarships</button>
+            <button type="button" class="filter-btn" id="sec-btn-biz" aria-pressed="false" onclick="selectSector('biz')">Climate &amp; Commercial SMEs</button>
+          </div>
+
+          <div class="sector-detail" id="sector-detail-panel">
+            <!-- Populated by JS on load and interaction -->
+          </div>
+        </div>
+
+        <div class="figure-card">
+          <span class="index-num">RESEARCH DIGEST · OUTPUT &amp; CAPACITY</span>
+          <h3>Monthly Content Volume by Package Tier</h3>
+          <p class="caption">
+            Comparison of verified monthly deliverables (short-form videos, educational carousels, and branded graphics) across Novatrix Media’s four retainer tiers.
+          </p>
+          <div class="chart-box">
+            <canvas id="deliverablesChart" aria-label="Stacked bar chart comparing monthly video, carousel, and graphic deliverables across Novatrix Media retainer tiers"></canvas>
+          </div>
+          <div class="research-Callouts">
+            <div class="mini-stat">
+              <div class="mini-stat-num">30 / 30</div>
+              <div class="mini-stat-label">Studied Kenyan prospects with active programmes and verified funding or revenue models.</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-num">LinkedIn + Reels</div>
+              <div class="mini-stat-label">Primary dual-channel gap identified for Executive Directors and donor/CSR attraction.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04: PORTFOLIO & CASE PROPOSALS SHOWCASE -->
+    <section id="portfolio" class="reveal-section">
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">04 · PORTFOLIO &amp; CLIENT PROPOSALS</span>
+          <span class="dossier-meta">Strategic Storytelling · Brand Identity · Web Systems</span>
+        </div>
+        <div class="filter-group" role="group" aria-label="Filter portfolio engagements">
+          <button type="button" class="filter-btn" id="port-all" aria-pressed="true" onclick="filterPortfolio('all')">All Work</button>
+          <button type="button" class="filter-btn" id="port-comms" aria-pressed="false" onclick="filterPortfolio('comms')">Video &amp; Comms</button>
+          <button type="button" class="filter-btn" id="port-brand" aria-pressed="false" onclick="filterPortfolio('brand')">Brand &amp; Launch</button>
+          <button type="button" class="filter-btn" id="port-web" aria-pressed="false" onclick="filterPortfolio('web')">Web Platforms</button>
+        </div>
+      </div>
+
+      <div class="section-intro">
+        <h2>How Novatrix translates field work and community missions into visibility</h2>
+        <p style="color: var(--on-surface-variant);">
+          Explore tailored communications strategies, brand launch blueprints, and web architecture proposals developed for Kenyan organisations. Select any engagement to inspect the full scope.
+        </p>
+      </div>
+
+      <div class="portfolio-grid" id="portfolio-grid">
+        <article class="case-card is-active" data-category="comms" id="case-card-bloom">
+          <div class="case-header">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip">Menstrual Equity · NGO</span>
+              <span class="dossier-meta">Oct 2026</span>
+            </div>
+            <h3>Bloom With Dignity</h3>
+            <p class="case-summary">
+              Short-form video &amp; LinkedIn thought leadership campaign spotlighting reusable pad production in DignityWorks hubs and school pad banks in Butere Sub-County.
+            </p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="inspectCase('bloom')">Inspect Strategy Brief</button>
+        </article>
+
+        <article class="case-card" data-category="comms" id="case-card-mco">
+          <div class="case-header">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">Grassroots CBO · Nairobi</span>
+              <span class="dossier-meta">Oct 2026</span>
+            </div>
+            <h3>Mathare Community Outreach</h3>
+            <p class="case-summary">
+              Story-led editing of field footage for TikTok and Facebook paired with weekly LinkedIn reflections turning grassroots activities into partner-ready lessons.
+            </p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="inspectCase('mco')">Inspect Strategy Brief</button>
+        </article>
+
+        <article class="case-card" data-category="brand" id="case-card-greenwave">
+          <div class="case-header">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip tag-chip-slate">Environment &amp; Youth</span>
+              <span class="dossier-meta">Oct 2026</span>
+            </div>
+            <h3>Greenwave Society</h3>
+            <p class="case-summary">
+              Six-pillar foundational communications launch: bespoke logo &amp; visual palette, brand voice architecture, 8 monthly Reels, and executive LinkedIn positioning.
+            </p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="inspectCase('greenwave')">Inspect Strategy Brief</button>
+        </article>
+
+        <article class="case-card" data-category="web" id="case-card-pcea">
+          <div class="case-header">
+            <div class="pkg-kicker-row">
+              <span class="tag-chip">Web Platform · Eldoret</span>
+              <span class="dossier-meta">Oct 2026</span>
+            </div>
+            <h3>PCEA Ayub Kinyua Parish</h3>
+            <p class="case-summary">
+              Tiered institutional web proposal (7–20 pages) featuring group enrolment, interactive monthly calendar, Watch Live &amp; Kiswahili options, and Year 2+ maintenance.
+            </p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="inspectCase('pcea')">Inspect Strategy Brief</button>
+        </article>
+      </div>
+
+      <!-- Interactive Case Brief Inspector -->
+      <div class="case-drawer" id="case-drawer" aria-live="polite">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Editorial Properties Strip -->
+      <div class="sub-band-head" style="margin-top: var(--space-xl);">
+        <h3>Proposed Editorial Properties: The Novatrix Business Spotlight</h3>
+        <span class="dossier-meta">Recurring Content Formats Beyond Service Sales</span>
+      </div>
+      <div class="series-strip">
+        <div class="series-pill-card">
+          <span class="dossier-meta">Series 01</span>
+          <h4 style="margin: 0.25rem 0;">The Market Brief</h4>
+          <p style="font-size: 0.85rem; color: var(--on-surface-variant);">Market trends, research findings, and sector intelligence for Kenyan decision-makers.</p>
+        </div>
+        <div class="series-pill-card">
+          <span class="dossier-meta">Series 02</span>
+          <h4 style="margin: 0.25rem 0;">Development Matters</h4>
+          <p style="font-size: 0.85rem; color: var(--on-surface-variant);">NGOs, community impact storytelling, and donor communication beyond raw statistics.</p>
+        </div>
+        <div class="series-pill-card">
+          <span class="dossier-meta">Series 03</span>
+          <h4 style="margin: 0.25rem 0;">Built to Be Seen</h4>
+          <p style="font-size: 0.85rem; color: var(--on-surface-variant);">Profiling construction firms, property developers, and manufacturers with real completed projects.</p>
+        </div>
+        <div class="series-pill-card">
+          <span class="dossier-meta">Series 04</span>
+          <h4 style="margin: 0.25rem 0;">Digital Presence Check</h4>
+          <p style="font-size: 0.85rem; color: var(--on-surface-variant);">Practical audits of websites, search discoverability, brand clarity, and executive visibility.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: INTERACTIVE QUOTE CALCULATOR & CONTACT REQUEST FORM -->
+    <section id="quote" class="reveal-section">
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">05 · GET A QUOTE &amp; CONTACT</span>
+          <span class="dossier-meta">Instant Estimate Calculator · Proposal Request Form</span>
+        </div>
+        <span class="dossier-meta" id="persistence-badge">Session auto-save active</span>
+      </div>
+
+      <div class="section-intro">
+        <h2>Configure your scope and request a tailored proposal</h2>
+        <p style="color: var(--on-surface-variant);">
+          Combine a monthly social media retainer, a fixed-scope website build, and production add-ons below. Your live estimate and deliverables summary update automatically and can be sent directly with your project brief.
+        </p>
+      </div>
+
+      <div class="quote-workspace">
+        <!-- Calculator Inputs -->
+        <div class="quote-panel">
+          <div class="preset-row">
+            <span class="dossier-meta" style="margin-right: var(--space-xs);">Quick Presets:</span>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="applyQuotePreset('cbo_launch')">Grassroots CBO Launch</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="applyQuotePreset('ngo_flagship')">NGO Flagship + Web</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="applyQuotePreset('sme_growth')">SME Growth Bundle</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="applyQuotePreset('reset')">Clear All</button>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="calc-track">Organisation Type</label>
+              <select id="calc-track" onchange="recalculateQuote()">
+                <option value="ngo">NGO / CBO / Development Organisation</option>
+                <option value="biz">Commercial Enterprise / SME / Brand</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="calc-social">Monthly Social Media Package</label>
+              <select id="calc-social" onchange="recalculateQuote()">
+                <option value="none">None (Website or One-off Only)</option>
+                <option value="social_starter">Social Starter — KSh 8,000 / mo</option>
+                <option value="social_growth_ngo" selected>Community Visibility / Social Growth — KSh 15,000 / mo</option>
+                <option value="social_visibility">Social Visibility — KSh 25,000 / mo</option>
+                <option value="strategic_comms">Strategic Comms Partnership — KSh 45,000 / mo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="calc-web">Website Design Package (One-Time)</label>
+              <select id="calc-web" onchange="recalculateQuote()">
+                <option value="none">No Website Build Needed</option>
+                <option value="web_basic">Basic Website (1 Page) — KSh 10,000</option>
+                <option value="web_starter">Starter / Essential (3–7 Pages) — KSh 15,000</option>
+                <option value="web_standard" selected>Standard Website (5–12 Pages) — KSh 20,000</option>
+                <option value="web_premium">Premium Website (8–20 Pages) — KSh 30,000</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="calc-maint">Year 2+ Annual Maintenance (Optional)</label>
+              <select id="calc-maint" onchange="recalculateQuote()">
+                <option value="none" selected>Decide Later / Self-Managed</option>
+                <option value="maint_essential">Essential Maintenance — KSh 5,000 / yr</option>
+                <option value="maint_standard">Standard Maintenance — KSh 7,000 / yr</option>
+                <option value="maint_premium">Premium Maintenance — KSh 10,000 / yr</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <span class="dossier-meta" style="display:block; margin-bottom: var(--space-sm);">Add-On Production &amp; Expansion</span>
+            <div class="addon-controls-grid">
+              <div class="field-group">
+                <label class="field-label" for="addon-reels">Extra Reel / Video Edits <span class="field-hint">(KSh 600 ea)</span></label>
+                <input type="number" id="addon-reels" min="0" max="40" value="0" oninput="recalculateQuote()">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="addon-carousels">Extra Carousel Posts <span class="field-hint">(KSh 800 ea)</span></label>
+                <input type="number" id="addon-carousels" min="0" max="30" value="0" oninput="recalculateQuote()">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="addon-pages">Extra Website Pages <span class="field-hint">(KSh 1,500 ea)</span></label>
+                <input type="number" id="addon-pages" min="0" max="30" value="0" oninput="recalculateQuote()">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="addon-filming">On-Site Filming Sessions <span class="field-hint">(KSh 2,500 ea)</span></label>
+                <input type="number" id="addon-filming" min="0" max="12" value="0" oninput="recalculateQuote()">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <label class="checkbox-card" for="addon-profile">
+              <input type="checkbox" id="addon-profile" onchange="recalculateQuote()">
+              <span>
+                <strong style="display:block; font-size:0.875rem;">Profile Setup &amp; Optimisation (+KSh 1,000)</strong>
+                <span class="field-hint">One-time bio, search &amp; cover visual alignment</span>
+              </span>
+            </label>
+
+            <label class="checkbox-card" for="addon-ads">
+              <input type="checkbox" id="addon-ads" onchange="recalculateQuote()">
+              <span>
+                <strong style="display:block; font-size:0.875rem;">Include Paid Ads Management Quote</strong>
+                <span class="field-hint">Quoted separately; client pays ad spend directly</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Live Quote Summary -->
+        <div class="summary-card" aria-live="polite">
+          <div class="pkg-kicker-row">
+            <span class="dossier-pill">ESTIMATE SUMMARY</span>
+            <span class="dossier-meta" id="summary-track-label">NGO / Development Track</span>
+          </div>
+
+          <div class="summary-totals">
+            <div>
+              <div class="total-label">Monthly Retainer</div>
+              <div class="total-amount" id="out-monthly">KSh 15,000</div>
+              <div class="field-hint" id="out-monthly-note">Billed monthly in advance</div>
+            </div>
+            <div>
+              <div class="total-label">One-Time Setup &amp; Web</div>
+              <div class="total-amount" id="out-onetime">KSh 20,000</div>
+              <div class="field-hint" id="out-maint-note">Year 2+ Maint: Not selected</div>
+            </div>
+          </div>
+
+          <div class="payment-split" id="out-deposit-row">
+            <span><strong>50% Project Deposit:</strong> <span class="num-cell" id="out-deposit">KSh 10,000</span></span>
+            <span><strong>50% On Launch:</strong> <span class="num-cell" id="out-balance">KSh 10,000</span></span>
+          </div>
+
+          <div>
+            <span class="dossier-meta" style="display:block; margin-bottom: var(--space-xs);">Included Scope Breakdown</span>
+            <ul class="deliverable-list" id="out-deliverables">
+              <!-- Populated by JS -->
+            </ul>
+          </div>
+
+          <div class="summary-actions">
+            <button type="button" class="btn btn-primary" onclick="transferQuoteToForm()">
+              <i data-lucide="arrow-down-circle" width="18" height="18" aria-hidden="true"></i>
+              Apply This Estimate to Request Form
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="downloadQuoteSummary()">
+              <i data-lucide="download" width="18" height="18" aria-hidden="true"></i>
+              Download Quote Brief (.txt)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Request Form -->
+      <div class="inquiry-wrapper" id="contact-form-section">
+        <form id="contact-request-form" onsubmit="handleContactSubmit(event)" novalidate>
+          <div style="margin-bottom: var(--space-md);">
+            <span class="dossier-pill">PROPOSAL REQUEST</span>
+            <h3 style="margin-top: var(--space-xs);">Send your project brief to Novatrix Media</h3>
+            <p style="font-size: 0.9rem; color: var(--on-surface-variant); margin-top: 0.25rem;">
+              We respond with a tailored workplan and onboarding timeline for your organisation.
+            </p>
+          </div>
+
+          <div id="form-status-banner" class="status-banner" role="status" aria-live="polite"></div>
+
+          <div class="form-grid-2" style="margin-top: var(--space-md);">
+            <div class="field-group">
+              <label class="field-label" for="req-org">Organisation or Business Name *</label>
+              <input type="text" id="req-org" required autocomplete="organization">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="req-name">Contact Person &amp; Role *</label>
+              <input type="text" id="req-name" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: var(--space-md);">
+            <div class="field-group">
+              <label class="field-label" for="req-email">Email Address *</label>
+              <input type="email" id="req-email" required autocomplete="email">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="req-phone">Phone / WhatsApp Number *</label>
+              <input type="tel" id="req-phone" required autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: var(--space-md);">
+            <div class="field-group">
+              <label class="field-label" for="req-sector">Primary Sector Focus *</label>
+              <select id="req-sector" required>
+                <option value="">Select your sector…</option>
+                <option value="NGO / Community-Based Organisation">NGO / Community-Based Organisation (CBO)</option>
+                <option value="Youth Development &amp; Leadership">Youth Development &amp; Leadership</option>
+                <option value="Women's &amp; Girls' Empowerment">Women’s &amp; Girls’ Empowerment</option>
+                <option value="Education &amp; Scholarships">Education &amp; Scholarships</option>
+                <option value="Environment, Climate &amp; Conservation">Environment, Climate &amp; Conservation</option>
+                <option value="Commercial Enterprise / SME / Builder">Commercial Enterprise / SME / Construction</option>
+                <option value="Faith / Institutional Organisation">Faith / Institutional Organisation</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="req-scope-summary">Configured Quote Summary</label>
+              <input type="text" id="req-scope-summary" readonly>
+            </div>
+          </div>
+
+          <div class="field-group" style="margin-top: var(--space-md);">
+            <label class="field-label" for="req-message">Programme Goals, Timeline &amp; Notes *</label>
+            <textarea id="req-message" required></textarea>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin-top: var(--space-md);">
+            <button type="submit" class="btn btn-gold" id="submit-inquiry-btn">
+              <i data-lucide="send" width="18" height="18" aria-hidden="true"></i>
+              Send Proposal Request
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="clear-saved-btn" onclick="clearSavedInquiries(this)">
+              Clear Saved Drafts
+            </button>
+          </div>
+        </form>
+
+        <!-- Direct Contact & Saved Inquiries -->
+        <aside class="aside-box" style="border-radius: var(--rounded-lg);">
+          <span class="dossier-pill">DIRECT CHANNELS</span>
+          <h3 style="margin-top: var(--space-sm);">Nairobi Studio &amp; Consultancy Desk</h3>
+          <p style="font-size: 0.9rem; color: var(--on-surface-variant); margin-top: var(--space-xs);">
+            Prefer a direct conversation before scoping? Reach our Nairobi communications desk via email or WhatsApp/phone.
+          </p>
+
+          <dl style="margin: var(--space-md) 0 0; display: grid; gap: var(--space-sm); font-size: 0.9rem;">
+            <div>
+              <dt class="dossier-meta">Agency Desk Email</dt>
+              <dd style="margin: 0; font-weight: 600;">Novatrixmedia@gmail.com</dd>
+            </div>
+            <div>
+              <dt class="dossier-meta">Lead Communications Consultant</dt>
+              <dd style="margin: 0; font-weight: 600;">Elizabeth Kilulu · elizakilulu@gmail.com</dd>
+            </div>
+            <div>
+              <dt class="dossier-meta">Phone / WhatsApp (Kenya)</dt>
+              <dd style="margin: 0; font-weight: 600;" class="num-cell">+254 714 103 508</dd>
+            </div>
+            <div>
+              <dt class="dossier-meta">Operating Base</dt>
+              <dd style="margin: 0; font-weight: 600;">Nairobi, Kenya (Serving Nationwide)</dd>
+            </div>
+          </dl>
+
+          <div class="saved-requests-box">
+            <span class="dossier-meta">Saved Requests in This Workspace</span>
+            <div id="saved-requests-list">
+              <p style="font-size: 0.85rem; color: var(--on-surface-variant); margin-top: var(--space-xs);">
+                No proposal requests submitted yet. Configure your quote and submit the form to log an inquiry here.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div>
+        <strong style="color: var(--on-surface); font-family: var(--font-headline); font-size: 1.125rem;">Novatrix Media</strong>
+        <p style="margin-top: var(--space-xs);">
+          Strategic Communications · Research · Digital Solutions. Helping NGOs, community initiatives, and commercial brands across Kenya build credibility and visibility.
+        </p>
+        <p class="footer-meta">Nairobi, Kenya · Novatrixmedia@gmail.com · +254 714 103 508</p>
+      </div>
+      <div>
+        <span class="dossier-meta" style="display:block; margin-bottom: var(--space-xs);">Source Grounding &amp; Sector References</span>
+        <p style="font-size: 0.8125rem; line-height: 1.5;">
+          Package pricing, deliverables, and positioning reflect Novatrix Media’s 2026 NGO &amp; Development Communications brochure, Social Media Management rate card, Website Design packages, December 2026 Content Calendar, Kenya 30-Organisation Prospect Research Report, and client proposals for Bloom With Dignity, Greenwave Society, Mathare Community Outreach, and PCEA Ayub Kinyua Parish. Sector benchmarks incorporate public programme insights from ANKA Organisation (ankaorg.co.ke), Akili Dada (akilidada.org), CREAW Kenya (home.creaw.org), Hatua Network (hatuanetwork.org), and Youth Alive! Kenya (youthalivekenya.org).
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    // --- DATA CATALOGS (Backtick literals throughout for apostrophe safety) ---
+    const SOCIAL_PACKAGES = {
+      none: {
+        name: `No Monthly Retainer`,
+        monthly: 0,
+        platforms: 0,
+        videos: 0,
+        carousels: 0,
+        graphics: 0,
+        notes: `One-time web or production scope only`
+      },
+      social_starter: {
+        name: `Social Starter (Commercial Entry)`,
+        monthly: 8000,
+        platforms: 2,
+        videos: 4,
+        carousels: 1,
+        graphics: 1,
+        notes: `IG optimisation, TikTok setup, one-time logo, monthly review`
+      },
+      social_growth_ngo: {
+        name: `Community Visibility / Social Growth`,
+        monthly: 15000,
+        platforms: 2,
+        videos: 6,
+        carousels: 2,
+        graphics: 2,
+        notes: `4–6 videos/mo (NGO/SME), monthly calendar, basic comment monitoring`
+      },
+      social_visibility: {
+        name: `Social Visibility (Commercial Scale)`,
+        monthly: 25000,
+        platforms: 3,
+        videos: 8,
+        carousels: 4,
+        graphics: 6,
+        notes: `Story updates, weekday comment/DM monitoring, strategy review`
+      },
+      strategic_comms: {
+        name: `Strategic Communications Partnership`,
+        monthly: 45000,
+        platforms: 4,
+        videos: 12,
+        carousels: 4,
+        graphics: 4,
+        notes: `LinkedIn donor positioning & 1 monthly strategic comms meeting`
+      }
+    };
+
+    const WEB_PACKAGES = {
+      none: {
+        name: `No Website Build`,
+        price: 0,
+        pages: `0 pages`,
+        revisions: 0,
+        timeline: `N/A`
+      },
+      web_basic: {
+        name: `Basic Website (One-Page)`,
+        price: 10000,
+        pages: `1-page (Home, About, Services, Contact)`,
+        revisions: 1,
+        timeline: `1–2 weeks`
+      },
+      web_starter: {
+        name: `Starter / Essential Website`,
+        price: 15000,
+        pages: `Up to 3 pages (SME) / 7 pages (Institutional)`,
+        revisions: 2,
+        timeline: `2 weeks`
+      },
+      web_standard: {
+        name: `Standard Website`,
+        price: 20000,
+        pages: `Up to 5 pages (SME) / 12 pages (Institutional)`,
+        revisions: 2,
+        timeline: `3 weeks`
+      },
+      web_premium: {
+        name: `Premium Website`,
+        price: 30000,
+        pages: `Up to 8 pages (SME) / 20 pages (Institutional)`,
+        revisions: 3,
+        timeline: `4–5 weeks`
+      }
+    };
+
+    const MAINT_PACKAGES = {
+      none: { name: `Not selected`, annual: 0, updates: `Self-managed` },
+      maint_essential: { name: `Essential Maintenance`, annual: 5000, updates: `Up to 2 updates/mo` },
+      maint_standard: { name: `Standard Maintenance`, annual: 7000, updates: `Up to 4 updates/mo` },
+      maint_premium: { name: `Premium Maintenance`, annual: 10000, updates: `Up to 6 updates/mo` }
+    };
+
+    const SECTOR_DATA = {
+      ngos: {
+        pill: `CORE FOCUS · GRASSROOTS & NATIONAL NGOS`,
+        title: `NGOs & Community-Based Organisations (CBOs)`,
+        summary: `Kenyan NGOs and grassroots CBOs deliver vital community services yet frequently struggle to convert programme updates into donor-ready narratives. Static flyers and sporadic posts leave international grantmakers and CSR partners unaware of field momentum.`,
+        gap: `70%+ rely on static graphics or text announcements; ~30% lack an up-to-date website.`,
+        mix: `Community Visibility (KSh 15k/mo) or Strategic Comms (KSh 45k/mo) + Standard Web (KSh 20k).`,
+        linkedin: `Position Executive Directors and programme leads with weekly LinkedIn insights to attract grantmakers and corporate CSR.`,
+        benchmark: `Modelled on outreach proposals like Mathare Community Outreach and institutional hubs such as PCEA Ayub Kinyua Parish.`
+      },
+      youth: {
+        pill: `CORE FOCUS · YOUTH LEADERSHIP & SKILLS`,
+        title: `Youth Development Organisations`,
+        summary: `With young people forming over 75% of Kenya’s population, youth-led initiatives drive climate action, civic engagement, and creative peacebuilding—requiring native TikTok and Instagram Reels storytelling alongside credible institutional reporting.`,
+        gap: `High field energy across workshops and art contests that rarely translates into consistent vertical video series.`,
+        mix: `8–12 short-form videos/mo + content calendar + youth-spotlight Reels from field events.`,
+        linkedin: `Bridge grassroots youth energy on TikTok with policy and UN/county stakeholder credibility on LinkedIn.`,
+        benchmark: `Grounded in Kenyan youth ecosystems exemplified by ANKA Organisation (Mazingira Day, UNEA-7, IGF consultations) and Youth Alive! Kenya.`
+      },
+      women: {
+        pill: `CORE FOCUS · GENDER EQUITY & DIGNITY`,
+        title: `Women’s & Girls’ Empowerment Initiatives`,
+        summary: `Organisations advancing girls’ leadership, SRHR, economic empowerment, and menstrual equity require deeply respectful, dignity-centred storytelling that protects beneficiaries while demonstrating measurable community transformation.`,
+        gap: `Balancing ethical safeguarding and beneficiary dignity with compelling proof-of-concept video for donors and local allies.`,
+        mix: `Dignity-led Reels (vocational hubs, sports, mentorship) + LinkedIn advocacy + Premium web resource hubs.`,
+        linkedin: `Highlight sustainable models (reusable production, feminist mentorship, economic livelihoods) to secure multi-year institutional grants.`,
+        benchmark: `Informed by sector leaders such as Akili Dada (308 scholarships, 2,837 girls mentored, 40 CBOs strengthened), CREAW Kenya (#NiMama, Jasiri), and Bloom With Dignity.`
+      },
+      edu: {
+        pill: `CORE FOCUS · LITERACY & CAREER PATHWAYS`,
+        title: `Education, Scholarships & Career Mentorship`,
+        summary: `Scholarship and career-incubation programmes produce life-changing alumni outcomes—yet without structured alumni spotlights and searchable web portals, prospective sponsors and employer partners cannot easily verify impact.`,
+        gap: `Rich alumni success stories buried in PDFs instead of accessible web portfolios and shareable career spotlights.`,
+        mix: `Premium Website (KSh 30k with CMS & alumni profiles) + Community Visibility retainer (KSh 15k/mo).`,
+        linkedin: `Showcase alumni career progression and employer partnerships to recruit mentors, sponsors, and graduate hires.`,
+        benchmark: `Informed by Kenya’s education-to-workforce benchmarks such as Hatua Network (92% alumni employment; alumni earning 5× entry household income).`
+      },
+      biz: {
+        pill: `CORE FOCUS · CLIMATE, BUILDERS & SMES`,
+        title: `Environmental Initiatives & Commercial Enterprises`,
+        summary: `From conservation nonprofits like Greenwave Society to construction firms, manufacturers, and growing Kenyan SMEs, commercial credibility depends on showing real completed projects, clean branding, and customer-ready digital storefronts.`,
+        gap: `Capable builders, suppliers, and emerging brands operating without an official website or consistent Reels product showcases.`,
+        mix: `Social Starter/Growth/Visibility (KSh 8k–25k/mo) + Standard/Premium Website (KSh 20k–30k) + Business Spotlight features.`,
+        linkedin: `Turn founder expertise and completed project portfolios into B2B trust, corporate contracts, and customer discovery.`,
+        benchmark: `Backed by Novatrix’s Greenwave Society brand-launch blueprint and Built to Be Seen / Business Spotlight editorial frameworks.`
+      }
+    };
+
+    const PORTFOLIO_CASES = {
+      bloom: {
+        pill: `CASE PROPOSAL · MENSTRUAL EQUITY & VOCATIONAL LIVELIHOODS`,
+        title: `Bloom With Dignity — Content & Advocacy Campaign`,
+        context: `Prepared in October 2026 to help Bloom With Dignity translate field realities in Butere Sub-County and local production hubs into dignified, donor-ready digital storytelling across Instagram, TikTok, Facebook, and LinkedIn.`,
+        deliverables: [
+          `8 short-form Reels/TikToks per month (~2/week) spotlighting DignityWorks sewing hubs & vocational jobs`,
+          `Field storytelling for the Butere Pilot Project showing school pad banks keeping girls in class`,
+          `Dynamic reels for Play – Inclusive Sports for Dignity & founder vision clips`,
+          `2 LinkedIn thought leadership posts/week positioning reusable solutions for CSR & grant partners`,
+          `Active comment moderation & monthly analytics performance reporting`
+        ],
+        recommendedPreset: `ngo_flagship`,
+        recommendedLabel: `Strategic Comms / Custom 8-Video NGO Scope`
+      },
+      mco: {
+        pill: `CASE PROPOSAL · URBAN COMMUNITY OUTREACH (NAIROBI)`,
+        title: `Mathare Community Outreach (MCO) — Digital Storytelling`,
+        context: `Prepared in October 2026 to help MCO turn supplied field footage into human-centred stories that clarify local needs, community resilience, and practical programme outcomes for partners and supporters.`,
+        deliverables: [
+          `8 story-led short-form videos/month edited from field footage with accessible on-screen captions`,
+          `Cross-platform publishing across TikTok and Facebook with cohesive visual presentation`,
+          `4 LinkedIn thought leadership posts/month (~1/week) sharing lessons learned beyond event announcements`,
+          `Structured monthly content calendar & routine audience engagement across all three channels`
+        ],
+        recommendedPreset: `cbo_launch`,
+        recommendedLabel: `Community Visibility + Extra Edits`
+      },
+      greenwave: {
+        pill: `CASE PROPOSAL · YOUTH, NATURE & CONSERVATION`,
+        title: `Greenwave Society — Six-Pillar Brand & Social Launch`,
+        context: `Prepared in October 2026 for Greenwave Society to establish a cohesive visual identity from scratch and build a credible voice speaking simultaneously to young people, communities, and environmental funders.`,
+        deliverables: [
+          `Logo & Visual Identity: versatile digital/print logo, colour palette, typography, and platform covers`,
+          `Profile setup & dual-register brand voice (approachable for youth, credible for funders)`,
+          `8 short-form videos/month covering who Greenwave is, work in action, past projects & leadership story`,
+          `2 LinkedIn thought leadership posts/week elevating founder perspective & conservation lessons`,
+          `Ongoing campaign engagement support & monthly performance insights`
+        ],
+        recommendedPreset: `sme_growth`,
+        recommendedLabel: `Social Growth / Visibility + Brand Identity`
+      },
+      pcea: {
+        pill: `CASE PROPOSAL · INSTITUTIONAL WEB PLATFORM (ELDORET)`,
+        title: `PCEA Ayub Kinyua Parish — Tiered Web Architecture`,
+        context: `Prepared in October 2026 for PCEA Ayub Kinyua Parish in Eldoret, replacing template websites with a custom parish hub built for member engagement, group enrolment, and multi-branch communication.`,
+        deliverables: [
+          `Three clear tiers: Essential (KSh 15k · 7 pages · 2 wks), Standard (KSh 20k · 12 pages · 3 wks), Premium (KSh 30k · 20 pages · 4–5 wks)`,
+          `Interactive monthly church calendar, group enrolment, event archive & self-update admin panel (Standard)`,
+          `Watch Live integration, Kiswahili language option & leadership training sessions (Premium)`,
+          `WhatsApp click-to-chat, Google Maps, 1st-year domain/hosting/SSL & 50/50 payment milestones`,
+          `Year 2+ annual maintenance plans: Essential (KSh 5k/yr), Standard (KSh 7k/yr), Premium (KSh 10k/yr)`
+        ],
+        recommendedPreset: `ngo_flagship`,
+        recommendedLabel: `Standard / Premium Web Platform`
+      }
+    };
+
+    // --- GLOBAL STATE ---
+    let appState = {
+      activeSector: `ngos`,
+      activeCase: `bloom`,
+      quote: {
+        track: `ngo`,
+        social: `social_growth_ngo`,
+        web: `web_standard`,
+        maint: `none`,
+        extraReels: 0,
+        extraCarousels: 0,
+        extraPages: 0,
+        filmingSessions: 0,
+        profileSetup: false,
+        adsQuote: false
+      },
+      inquiries: []
+    };
+
+    let deliverablesChartInstance = null;
+
+    // --- HELPERS ---
+    function formatKSh(num) {
+      return `KSh ` + Number(num || 0).toLocaleString(`en-KE`);
+    }
+
+    function getCssToken(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    async function persistState() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState(appState);
+        }
+      } catch (err) {
+        // Ignore persistence errors in standalone preview
+      }
+    }
+
+    // --- PACKAGE TRACK FILTERING ---
+    function filterPackageTrack(track) {
+      const btnAll = document.getElementById(`track-all`);
+      const btnNgo = document.getElementById(`track-ngo`);
+      const btnBiz = document.getElementById(`track-biz`);
+      if (btnAll) btnAll.setAttribute(`aria-pressed`, track === `all` ? `true` : `false`);
+      if (btnNgo) btnNgo.setAttribute(`aria-pressed`, track === `ngo` ? `true` : `false`);
+      if (btnBiz) btnBiz.setAttribute(`aria-pressed`, track === `biz` ? `true` : `false`);
+
+      const cards = document.querySelectorAll(`#social-packages-grid .package-card`);
+      cards.forEach(function(card) {
+        const cardTrack = card.getAttribute(`data-track`);
+        const show = track === `all` || cardTrack === `both` || cardTrack === track;
+        if (show) {
+          card.classList.remove(`is-hidden`);
+        } else {
+          card.classList.add(`is-hidden`);
+        }
+      });
+
+      const statusEl = document.getElementById(`package-filter-status`);
+      if (statusEl) {
+        if (track === `ngo`) {
+          statusEl.textContent = `Showing NGO & Development tiers (KSh 15,000 – KSh 45,000/mo)`;
+        } else if (track === `biz`) {
+          statusEl.textContent = `Showing Commercial & SME tiers (KSh 8,000 – KSh 25,000/mo)`;
+        } else {
+          statusEl.textContent = `Showing all 4 monthly tiers (KSh 8,000 – KSh 45,000/mo)`;
+        }
+      }
+    }
+
+    function selectPackageForQuote(socialId, track) {
+      const trackEl = document.getElementById(`calc-track`);
+      const socialEl = document.getElementById(`calc-social`);
+      if (trackEl) trackEl.value = track;
+      if (socialEl) socialEl.value = socialId;
+      recalculateQuote();
+      const quoteSection = document.getElementById(`quote`);
+      if (quoteSection) quoteSection.scrollIntoView({ behavior: `smooth` });
+    }
+
+    function selectWebForQuote(webId) {
+      const webEl = document.getElementById(`calc-web`);
+      if (webEl) webEl.value = webId;
+      recalculateQuote();
+      const quoteSection = document.getElementById(`quote`);
+      if (quoteSection) quoteSection.scrollIntoView({ behavior: `smooth` });
+    }
+
+    // --- SECTOR EXPLORER ---
+    function selectSector(sectorKey) {
+      if (!SECTOR_DATA[sectorKey]) return;
+      appState.activeSector = sectorKey;
+
+      const keys = [`ngos`, `youth`, `women`, `edu`, `biz`];
+      keys.forEach(function(k) {
+        const btn = document.getElementById(`sec-btn-` + k);
+        if (btn) btn.setAttribute(`aria-pressed`, k === sectorKey ? `true` : `false`);
+      });
+
+      const panel = document.getElementById(`sector-detail-panel`);
+      const d = SECTOR_DATA[sectorKey];
+      if (panel) {
+        panel.innerHTML = `
+          <div>
+            <span class="tag-chip">${d.pill}</span>
+            <h3 style="margin-top: var(--space-xs);">${d.title}</h3>
+          </div>
+          <p style="font-size: 0.9375rem; color: var(--on-surface-variant); line-height: 1.55;">${d.summary}</p>
+          <div class="sector-meta-grid">
+            <div>
+              <div class="sector-kv-label">Observed Digital Gap</div>
+              <div class="sector-kv-val">${d.gap}</div>
+            </div>
+            <div>
+              <div class="sector-kv-label">Recommended Novatrix Mix</div>
+              <div class="sector-kv-val">${d.mix}</div>
+            </div>
+            <div>
+              <div class="sector-kv-label">LinkedIn &amp; Stakeholder Angle</div>
+              <div class="sector-kv-val">${d.linkedin}</div>
+            </div>
+            <div>
+              <div class="sector-kv-label">Kenyan Sector Benchmark</div>
+              <div class="sector-kv-val">${d.benchmark}</div>
+            </div>
+          </div>
+        `;
+      }
+      persistState();
+    }
+
+    // --- CHART.JS DELIVERABLES VISUALIZATION ---
+    function renderDeliverablesChart() {
+      const canvas = document.getElementById(`deliverablesChart`);
+      if (!canvas || typeof Chart === `undefined`) return;
+
+      if (deliverablesChartInstance) {
+        deliverablesChartInstance.destroy();
+      }
+
+      const c1 = getCssToken(`--data-1`) || `#1f4e5f`;
+      const c2 = getCssToken(`--data-2`) || `#d99000`;
+      const c3 = getCssToken(`--data-3`) || `#2b6e52`;
+      const ink = getCssToken(`--on-surface`) || `#17181a`;
+      const muted = getCssToken(`--on-surface-variant`) || `#56585c`;
+      const gridColor = getCssToken(`--outline-variant`) || `#dedad0`;
+      const labelFont = getCssToken(`--font-label`) || `monospace`;
+
+      deliverablesChartInstance = new Chart(canvas, {
+        type: `bar`,
+        data: {
+          labels: [
+            `Social Starter (8k)`,
+            `Community / Growth (15k)`,
+            `Social Visibility (25k)`,
+            `Strategic Comms (45k)`
+          ],
+          datasets: [
+            {
+              label: `Short-Form Videos`,
+              data: [4, 6, 8, 12],
+              backgroundColor: c1,
+              borderRadius: 2
+            },
+            {
+              label: `Carousel Posts`,
+              data: [1, 2, 4, 4],
+              backgroundColor: c2,
+              borderRadius: 2
+            },
+            {
+              label: `Branded Graphics`,
+              data: [1, 2, 6, 4],
+              backgroundColor: c3,
+              borderRadius: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: `y`,
+          plugins: {
+            legend: {
+              position: `bottom`,
+              labels: {
+                color: ink,
+                boxWidth: 12,
+                font: { family: labelFont, size: 11 }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                footer: function(items) {
+                  let total = 0;
+                  items.forEach(function(it) { total += it.parsed.x; });
+                  return `Total monthly creative assets: ` + total;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              grid: { color: gridColor },
+              ticks: { color: muted, font: { family: labelFont, size: 11 } },
+              title: {
+                display: true,
+                text: `Monthly Assets Delivered`,
+                color: muted,
+                font: { family: labelFont, size: 11 }
+              }
+            },
+            y: {
+              stacked: true,
+              grid: { display: false },
+              ticks: { color: ink, font: { family: labelFont, size: 11 } }
+            }
+          }
+        }
+      });
+    }
+
+    // --- PORTFOLIO FILTER & INSPECTOR ---
+    function filterPortfolio(category) {
+      const ids = [`all`, `comms`, `brand`, `web`];
+      ids.forEach(function(id) {
+        const btn = document.getElementById(`port-` + id);
+        if (btn) btn.setAttribute(`aria-pressed`, id === category ? `true` : `false`);
+      });
+
+      const cards = document.querySelectorAll(`#portfolio-grid .case-card`);
+      let firstVisible = null;
+      cards.forEach(function(card) {
+        const cat = card.getAttribute(`data-category`);
+        const show = category === `all` || cat === category;
+        if (show) {
+          card.classList.remove(`is-hidden`);
+          if (!firstVisible) firstVisible = card.id.replace(`case-card-`, ``);
+        } else {
+          card.classList.add(`is-hidden`);
+        }
+      });
+
+      const activeCard = document.getElementById(`case-card-` + appState.activeCase);
+      if (activeCard && activeCard.classList.contains(`is-hidden`) && firstVisible) {
+        inspectCase(firstVisible);
+      }
+    }
+
+    function inspectCase(caseKey) {
+      const c = PORTFOLIO_CASES[caseKey];
+      if (!c) return;
+      appState.activeCase = caseKey;
+
+      Object.keys(PORTFOLIO_CASES).forEach(function(k) {
+        const card = document.getElementById(`case-card-` + k);
+        if (card) {
+          if (k === caseKey) card.classList.add(`is-active`);
+          else card.classList.remove(`is-active`);
+        }
+      });
+
+      const drawer = document.getElementById(`case-drawer`);
+      if (drawer) {
+        const itemsHtml = c.deliverables.map(function(item) {
+          return `<li><i data-lucide="check" width="16" height="16" aria-hidden="true"></i><span>${item}</span></li>`;
+        }).join(``);
+
+        drawer.innerHTML = `
+          <div>
+            <span class="tag-chip">${c.pill}</span>
+            <h3 style="margin-top: var(--space-xs);">${c.title}</h3>
+            <p style="margin-top: var(--space-sm); color: var(--on-surface-variant); font-size: 0.9375rem;">${c.context}</p>
+            <div style="margin-top: var(--space-md); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm);">
+              <button type="button" class="btn btn-primary btn-sm" onclick="loadCasePreset('${c.recommendedPreset}')">
+                Load Similar Scope in Calculator
+              </button>
+              <span class="dossier-meta">Reference Tier: ${c.recommendedLabel}</span>
+            </div>
+          </div>
+          <div>
+            <span class="dossier-meta" style="display:block; margin-bottom: var(--space-xs);">Proposed Deliverables &amp; Architecture</span>
+            <ul class="pkg-list" style="border-top: none; padding-top: 0;">
+              ${itemsHtml}
+            </ul>
+          </div>
+        `;
+        if (window.lucide && typeof window.lucide.createIcons === `function`) {
+          window.lucide.createIcons();
+        }
+      }
+      persistState();
+    }
+
+    function loadCasePreset(presetKey) {
+      applyQuotePreset(presetKey);
+      const quoteEl = document.getElementById(`quote`);
+      if (quoteEl) quoteEl.scrollIntoView({ behavior: `smooth` });
+    }
+
+    // --- QUOTE CALCULATOR ---
+    function applyQuotePreset(preset) {
+      const trackEl = document.getElementById(`calc-track`);
+      const socialEl = document.getElementById(`calc-social`);
+      const webEl = document.getElementById(`calc-web`);
+      const maintEl = document.getElementById(`calc-maint`);
+      const reelsEl = document.getElementById(`addon-reels`);
+      const carouselsEl = document.getElementById(`addon-carousels`);
+      const pagesEl = document.getElementById(`addon-pages`);
+      const filmingEl = document.getElementById(`addon-filming`);
+      const profileEl = document.getElementById(`addon-profile`);
+      const adsEl = document.getElementById(`addon-ads`);
+
+      if (!trackEl || !socialEl || !webEl || !maintEl) return;
+
+      if (preset === `cbo_launch`) {
+        trackEl.value = `ngo`;
+        socialEl.value = `social_growth_ngo`;
+        webEl.value = `web_starter`;
+        maintEl.value = `maint_essential`;
+        if (reelsEl) reelsEl.value = 2;
+        if (carouselsEl) carouselsEl.value = 0;
+        if (pagesEl) pagesEl.value = 0;
+        if (filmingEl) filmingEl.value = 1;
+        if (profileEl) profileEl.checked = true;
+        if (adsEl) adsEl.checked = false;
+      } else if (preset === `ngo_flagship`) {
+        trackEl.value = `ngo`;
+        socialEl.value = `strategic_comms`;
+        webEl.value = `web_premium`;
+        maintEl.value = `maint_standard`;
+        if (reelsEl) reelsEl.value = 0;
+        if (carouselsEl) carouselsEl.value = 0;
+        if (pagesEl) pagesEl.value = 0;
+        if (filmingEl) filmingEl.value = 2;
+        if (profileEl) profileEl.checked = false;
+        if (adsEl) adsEl.checked = false;
+      } else if (preset === `sme_growth`) {
+        trackEl.value = `biz`;
+        socialEl.value = `social_visibility`;
+        webEl.value = `web_standard`;
+        maintEl.value = `maint_standard`;
+        if (reelsEl) reelsEl.value = 0;
+        if (carouselsEl) carouselsEl.value = 0;
+        if (pagesEl) pagesEl.value = 0;
+        if (filmingEl) filmingEl.value = 1;
+        if (profileEl) profileEl.checked = true;
+        if (adsEl) adsEl.checked = true;
+      } else if (preset === `reset`) {
+        trackEl.value = `ngo`;
+        socialEl.value = `none`;
+        webEl.value = `none`;
+        maintEl.value = `none`;
+        if (reelsEl) reelsEl.value = 0;
+        if (carouselsEl) carouselsEl.value = 0;
+        if (pagesEl) pagesEl.value = 0;
+        if (filmingEl) filmingEl.value = 0;
+        if (profileEl) profileEl.checked = false;
+        if (adsEl) adsEl.checked = false;
+      }
+
+      recalculateQuote();
+    }
+
+    function readQuoteInputs() {
+      const trackEl = document.getElementById(`calc-track`);
+      const socialEl = document.getElementById(`calc-social`);
+      const webEl = document.getElementById(`calc-web`);
+      const maintEl = document.getElementById(`calc-maint`);
+      const reelsEl = document.getElementById(`addon-reels`);
+      const carouselsEl = document.getElementById(`addon-carousels`);
+      const pagesEl = document.getElementById(`addon-pages`);
+      const filmingEl = document.getElementById(`addon-filming`);
+      const profileEl = document.getElementById(`addon-profile`);
+      const adsEl = document.getElementById(`addon-ads`);
+
+      const clampInt = function(el, maxVal) {
+        if (!el) return 0;
+        const n = parseInt(el.value, 10);
+        if (isNaN(n) || n < 0) return 0;
+        return Math.min(n, maxVal);
+      };
+
+      return {
+        track: trackEl ? trackEl.value : `ngo`,
+        social: socialEl && SOCIAL_PACKAGES[socialEl.value] ? socialEl.value : `none`,
+        web: webEl && WEB_PACKAGES[webEl.value] ? webEl.value : `none`,
+        maint: maintEl && MAINT_PACKAGES[maintEl.value] ? maintEl.value : `none`,
+        extraReels: clampInt(reelsEl, 40),
+        extraCarousels: clampInt(carouselsEl, 30),
+        extraPages: clampInt(pagesEl, 30),
+        filmingSessions: clampInt(filmingEl, 12),
+        profileSetup: profileEl ? Boolean(profileEl.checked) : false,
+        adsQuote: adsEl ? Boolean(adsEl.checked) : false
+      };
+    }
+
+    function computeQuoteTotals(q) {
+      const soc = SOCIAL_PACKAGES[q.social] || SOCIAL_PACKAGES.none;
+      const web = WEB_PACKAGES[q.web] || WEB_PACKAGES.none;
+      const maint = MAINT_PACKAGES[q.maint] || MAINT_PACKAGES.none;
+
+      const monthlyAddons = (q.extraReels * 600) + (q.extraCarousels * 800) + (q.filmingSessions * 2500);
+      const monthlyTotal = soc.monthly + monthlyAddons;
+
+      const onetimeWeb = web.price + (q.extraPages * 1500) + (q.profileSetup ? 1000 : 0);
+      const deposit50 = Math.round(onetimeWeb * 0.5);
+      const balance50 = onetimeWeb - deposit50;
+
+      return {
+        soc: soc,
+        web: web,
+        maint: maint,
+        monthlyTotal: monthlyTotal,
+        onetimeTotal: onetimeWeb,
+        deposit50: deposit50,
+        balance50: balance50,
+        annualMaint: maint.annual,
+        totalVideos: soc.videos + q.extraReels,
+        totalCarousels: soc.carousels + q.extraCarousels
+      };
+    }
+
+    function recalculateQuote() {
+      const q = readQuoteInputs();
+      appState.quote = q;
+      const t = computeQuoteTotals(q);
+
+      const trackLabelEl = document.getElementById(`summary-track-label`);
+      if (trackLabelEl) {
+        trackLabelEl.textContent = q.track === `ngo` ? `NGO / Development Track` : `Commercial / SME Track`;
+      }
+
+      const outMonthly = document.getElementById(`out-monthly`);
+      const outOnetime = document.getElementById(`out-onetime`);
+      const outMaintNote = document.getElementById(`out-maint-note`);
+      const outDeposit = document.getElementById(`out-deposit`);
+      const outBalance = document.getElementById(`out-balance`);
+      const outDeliverables = document.getElementById(`out-deliverables`);
+
+      if (outMonthly) outMonthly.textContent = formatKSh(t.monthlyTotal);
+      if (outOnetime) outOnetime.textContent = formatKSh(t.onetimeTotal);
+      if (outMaintNote) {
+        outMaintNote.textContent = t.annualMaint > 0
+          ? `Year 2+ Maint: ` + formatKSh(t.annualMaint) + `/yr`
+          : `Year 2+ Maint: Not selected`;
+      }
+      if (outDeposit) outDeposit.textContent = formatKSh(t.deposit50);
+      if (outBalance) outBalance.textContent = formatKSh(t.balance50);
+
+      if (outDeliverables) {
+        const rows = [];
+        rows.push(`<li><span>Social Retainer</span><strong>${t.soc.name}</strong></li>`);
+        if (q.social !== `none` || q.extraReels > 0 || q.extraCarousels > 0) {
+          rows.push(`<li><span>Monthly Video / Carousels / Graphics</span><strong>${t.totalVideos} videos · ${t.totalCarousels} carousels · ${t.soc.graphics} graphics</strong></li>`);
+        }
+        if (q.filmingSessions > 0) {
+          rows.push(`<li><span>On-Site Filming Sessions</span><strong>${q.filmingSessions} × KSh 2,500</strong></li>`);
+        }
+        rows.push(`<li><span>Website Build</span><strong>${t.web.name} (${t.web.pages})</strong></li>`);
+        if (q.extraPages > 0) {
+          rows.push(`<li><span>Additional Website Pages</span><strong>+${q.extraPages} pages (KSh ${ (q.extraPages * 1500).toLocaleString(`en-KE`) })</strong></li>`);
+        }
+        if (q.profileSetup) {
+          rows.push(`<li><span>Profile Setup &amp; Optimisation</span><strong>Included (+KSh 1,000)</strong></li>`);
+        }
+        if (t.annualMaint > 0) {
+          rows.push(`<li><span>Year 2+ Maintenance</span><strong>${t.maint.name} (${t.maint.updates})</strong></li>`);
+        }
+        if (q.adsQuote) {
+          rows.push(`<li><span>Paid Ads Management</span><strong>Custom quote requested</strong></li>`);
+        }
+        outDeliverables.innerHTML = rows.join(``);
+      }
+
+      syncScopeSummaryInput(q, t);
+      persistState();
+    }
+
+    function syncScopeSummaryInput(q, t) {
+      const scopeInput = document.getElementById(`req-scope-summary`);
+      if (!scopeInput) return;
+      const parts = [];
+      if (t.monthlyTotal > 0) parts.push(`${t.soc.name} (${formatKSh(t.monthlyTotal)}/mo)`);
+      if (t.onetimeTotal > 0) parts.push(`${t.web.name} (${formatKSh(t.onetimeTotal)} one-time)`);
+      if (t.annualMaint > 0) parts.push(`${t.maint.name} (${formatKSh(t.annualMaint)}/yr)`);
+      if (q.adsQuote) parts.push(`+ Paid Ads Quote`);
+      scopeInput.value = parts.length > 0 ? parts.join(` | `) : `Custom Advisory Inquiry`;
+    }
+
+    function transferQuoteToForm() {
+      const q = readQuoteInputs();
+      const t = computeQuoteTotals(q);
+      syncScopeSummaryInput(q, t);
+
+      const sectorSelect = document.getElementById(`req-sector`);
+      if (sectorSelect && !sectorSelect.value) {
+        sectorSelect.value = q.track === `ngo`
+          ? `NGO / Community-Based Organisation`
+          : `Commercial Enterprise / SME / Builder`;
+      }
+
+      const formSection = document.getElementById(`contact-form-section`);
+      if (formSection) formSection.scrollIntoView({ behavior: `smooth` });
+      const orgInput = document.getElementById(`req-org`);
+      if (orgInput) orgInput.focus();
+    }
+
+    function downloadQuoteSummary() {
+      const q = readQuoteInputs();
+      const t = computeQuoteTotals(q);
+      const lines = [
+        `NOVATRIX MEDIA — CUSTOM QUOTE ESTIMATE`,
+        `Nairobi, Kenya | Novatrixmedia@gmail.com | +254 714 103 508`,
+        `----------------------------------------------------------`,
+        `Client Track: ${q.track === `ngo` ? `NGO / Development Organisation` : `Commercial Enterprise / SME`}`,
+        `Social Media Package: ${t.soc.name} (${formatKSh(t.soc.monthly)}/mo)`,
+        `  - Platforms managed: ${t.soc.platforms}`,
+        `  - Short-form videos/mo: ${t.totalVideos} (includes ${q.extraReels} extra edits)`,
+        `  - Carousel posts/mo: ${t.totalCarousels} (includes ${q.extraCarousels} extra)`,
+        `  - Branded graphics/mo: ${t.soc.graphics}`,
+        `  - On-site filming sessions: ${q.filmingSessions} (KSh 2,500 each)`,
+        `Website Design Package: ${t.web.name} (${formatKSh(t.web.price)})`,
+        `  - Scope: ${t.web.pages} | Timeline: ${t.web.timeline}`,
+        `  - Extra website pages: ${q.extraPages} (${formatKSh(q.extraPages * 1500)})`,
+        `  - Profile setup & optimisation: ${q.profileSetup ? `Yes (+KSh 1,000)` : `No`}`,
+        `Year 2+ Annual Maintenance: ${t.maint.name} (${formatKSh(t.annualMaint)}/yr)`,
+        `Paid Advertising Management: ${q.adsQuote ? `Custom quote requested` : `Not selected`}`,
+        `----------------------------------------------------------`,
+        `MONTHLY RETAINER TOTAL: ${formatKSh(t.monthlyTotal)} / month`,
+        `ONE-TIME SETUP & WEB TOTAL: ${formatKSh(t.onetimeTotal)}`,
+        `  - 50% Initial Deposit: ${formatKSh(t.deposit50)}`,
+        `  - 50% Balance Upon Launch: ${formatKSh(t.balance50)}`,
+        `----------------------------------------------------------`,
+        `Note: Monthly retainers are billed monthly in advance. Paid ad spend is paid directly to platforms by client.`
+      ];
+      const textContent = lines.join(`\n`);
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: textContent,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename: `novatrix-media-quote-estimate.txt`
+        });
+      } else {
+        const blob = new Blob([textContent], { type: `text/plain;charset=utf-8` });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement(`a`);
+        a.href = url;
+        a.download = `novatrix-media-quote-estimate.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    // --- CONTACT FORM VALIDATION & SUBMISSION ---
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      const orgEl = document.getElementById(`req-org`);
+      const nameEl = document.getElementById(`req-name`);
+      const emailEl = document.getElementById(`req-email`);
+      const phoneEl = document.getElementById(`req-phone`);
+      const sectorEl = document.getElementById(`req-sector`);
+      const scopeEl = document.getElementById(`req-scope-summary`);
+      const msgEl = document.getElementById(`req-message`);
+      const banner = document.getElementById(`form-status-banner`);
+
+      const fields = [orgEl, nameEl, emailEl, phoneEl, sectorEl, msgEl];
+      fields.forEach(function(f) { if (f) f.classList.remove(`has-error`); });
+
+      const errors = [];
+      if (!orgEl || !orgEl.value.trim()) {
+        if (orgEl) orgEl.classList.add(`has-error`);
+        errors.push(`Organisation or business name is required.`);
+      }
+      if (!nameEl || !nameEl.value.trim()) {
+        if (nameEl) nameEl.classList.add(`has-error`);
+        errors.push(`Contact person and role are required.`);
+      }
+      const emailVal = emailEl ? emailEl.value.trim() : ``;
+      if (!emailVal || emailVal.indexOf(`@`) === -1 || emailVal.indexOf(`.`) === -1) {
+        if (emailEl) emailEl.classList.add(`has-error`);
+        errors.push(`Enter a valid email address.`);
+      }
+      if (!phoneEl || phoneEl.value.trim().length < 7) {
+        if (phoneEl) phoneEl.classList.add(`has-error`);
+        errors.push(`Enter a valid phone or WhatsApp number.`);
+      }
+      if (!sectorEl || !sectorEl.value) {
+        if (sectorEl) sectorEl.classList.add(`has-error`);
+        errors.push(`Select your primary sector focus.`);
+      }
+      if (!msgEl || msgEl.value.trim().length < 12) {
+        if (msgEl) msgEl.classList.add(`has-error`);
+        errors.push(`Please include a brief note (at least 12 characters) on your goals or timeline.`);
+      }
+
+      if (errors.length > 0) {
+        if (banner) {
+          banner.className = `status-banner is-visible is-error`;
+          banner.innerHTML = `<strong>Please review the highlighted fields:</strong><br>` + errors.join(` `);
+        }
+        return;
+      }
+
+      const entry = {
+        id: Date.now(),
+        org: orgEl.value.trim(),
+        contact: nameEl.value.trim(),
+        email: emailVal,
+        phone: phoneEl.value.trim(),
+        sector: sectorEl.value,
+        scope: scopeEl ? scopeEl.value : ``,
+        message: msgEl.value.trim(),
+        createdAt: new Date().toLocaleDateString(`en-KE`, { year: `numeric`, month: `short`, day: `numeric` })
+      };
+
+      appState.inquiries.unshift(entry);
+      if (appState.inquiries.length > 5) appState.inquiries = appState.inquiries.slice(0, 5);
+
+      if (banner) {
+        banner.className = `status-banner is-visible is-success`;
+        banner.innerHTML = `<strong>Proposal brief logged for ${entry.org}.</strong> Your scope summary (<em>${entry.scope}</em>) has been saved to this workspace. You may also send this brief directly to <strong>Novatrixmedia@gmail.com</strong> or WhatsApp <strong>+254 714 103 508</strong>.`;
+      }
+
+      renderSavedInquiries();
+      persistState();
+    }
+
+    function renderSavedInquiries() {
+      const container = document.getElementById(`saved-requests-list`);
+      if (!container) return;
+
+      if (!appState.inquiries || appState.inquiries.length === 0) {
+        container.innerHTML = `<p style="font-size: 0.85rem; color: var(--on-surface-variant); margin-top: var(--space-xs);">No proposal requests submitted yet. Configure your quote and submit the form to log an inquiry here.</p>`;
+        return;
+      }
+
+      container.innerHTML = appState.inquiries.map(function(inq) {
+        return `
+          <div class="request-log-item">
+            <div style="display:flex; justify-content:space-between; gap: var(--space-xs);">
+              <strong>${inq.org}</strong>
+              <span class="dossier-meta">${inq.createdAt}</span>
+            </div>
+            <div style="color: var(--secondary); font-weight: 600; margin-top: 0.15rem;">${inq.scope}</div>
+            <div style="color: var(--on-surface-variant); margin-top: 0.15rem;">${inq.contact} · ${inq.sector}</div>
+          </div>
+        `;
+      }).join(``);
+    }
+
+    function clearSavedInquiries(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Click again to clear drafts`;
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Clear Saved Drafts`;
+      appState.inquiries = [];
+      renderSavedInquiries();
+      persistState();
+    }
+
+    function restoreQuoteInputsFromState(q) {
+      if (!q) return;
+      const setVal = function(id, val) {
+        const el = document.getElementById(id);
+        if (el && val !== undefined && val !== null) el.value = val;
+      };
+      const setCheck = function(id, val) {
+        const el = document.getElementById(id);
+        if (el) el.checked = Boolean(val);
+      };
+      setVal(`calc-track`, q.track);
+      setVal(`calc-social`, q.social);
+      setVal(`calc-web`, q.web);
+      setVal(`calc-maint`, q.maint);
+      setVal(`addon-reels`, q.extraReels);
+      setVal(`addon-carousels`, q.extraCarousels);
+      setVal(`addon-pages`, q.extraPages);
+      setVal(`addon-filming`, q.filmingSessions);
+      setCheck(`addon-profile`, q.profileSetup);
+      setCheck(`addon-ads`, q.adsQuote);
+    }
+
+    // --- SCROLL REVEAL ---
+    function initScrollReveals() {
+      if (!(`IntersectionObserver` in window)) return;
+      const sections = document.querySelectorAll(`.reveal-section`);
+      sections.forEach(function(sec) {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top > window.innerHeight * 0.92) {
+          sec.classList.add(`is-pending`);
+        }
+      });
+
+      const observer = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove(`is-pending`);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      sections.forEach(function(sec) {
+        observer.observe(sec);
+      });
+    }
+
+    // --- INITIALIZATION ---
+    async function initApp() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved) {
+            if (saved.activeSector && SECTOR_DATA[saved.activeSector]) appState.activeSector = saved.activeSector;
+            if (saved.activeCase && PORTFOLIO_CASES[saved.activeCase]) appState.activeCase = saved.activeCase;
+            if (saved.quote) {
+              appState.quote = Object.assign({}, appState.quote, saved.quote);
+              restoreQuoteInputsFromState(appState.quote);
+            }
+            if (Array.isArray(saved.inquiries)) {
+              appState.inquiries = saved.inquiries;
+            }
+          }
+        }
+      } catch (err) {
+        // Proceed with defaults
+      }
+
+      selectSector(appState.activeSector);
+      inspectCase(appState.activeCase);
+      recalculateQuote();
+      renderSavedInquiries();
+      renderDeliverablesChart();
+      initScrollReveals();
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+          window.notebookAppApi.notifyAppReady();
+        }
+      } catch (err) {
+        // Standalone mode
+      }
+    }
+
+    document.addEventListener(`DOMContentLoaded`, initApp);
+  </script>
+</body>
+</html>
